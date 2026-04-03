@@ -1,31 +1,113 @@
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 void main() {
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     home: BookListScreen(),
   ));
 }
 
 class BookListScreen extends StatelessWidget {
+  BookListScreen({super.key});
+
   final List<Map<String, String>> books = [
-    {'title': 'Algorithms to Live By: The Computer Science of Human Decisions', 'author': 'Brian Christian', 'description': 'In a dazzlingly interdisciplinary work, '
-        'Brian Christian and Tom Griffiths show how algorithms developed for computers also untangle very human questions. '
-        'They explain how to have better hunches and when to leave things to chance, how to deal with overwhelming choices and how best to connect with others. '
-        'From finding a spouse to finding a parking spot, from organizing one’s inbox to peering into the future, '
-        'Algorithms to Live By transforms the wisdom of computer science into strategies for human living.'},
-    {'title': 'Beginning Programming All-in-One Desk Reference for Dummies', 'author': 'Wallace Wang', 'description': 'Beginning Programming All In One Desk Reference For Dummies shows you how to decide what you want your program to do, '
-        'turn your instructions into “machine language” that the computer understands, use programming best practices, '
-        'explore the “how” and “why” of data structuring, and more. '
-        'You’ll even get a look into various applications like database management, bioinformatics, computer security, and artificial intelligence. '
-        'Soon you’ll realize that — wow! You’re a programmer!'},
-    {'title': 'Streamlit for Data Science: Create interactive data apps in Python', 'author': 'Tyler Richards', 'description': 'If you work with data in Python and are looking to create data apps that showcase ML models and make beautiful interactive visualizations, then this is the ideal book for you. Streamlit for Data Science, Second Edition, shows you how to create and deploy data apps quickly, all within Python. This helps you create prototypes in hours instead of days!'
-        'Written by a prolific Streamlit user and senior data scientist at Snowflake, this fully updated second edition builds on the practical nature of the previous edition with exciting updates, including connecting Streamlit to data warehouses like Snowflake, integrating Hugging Face and OpenAI models into your apps, and connecting and building apps on top of Streamlit databases. Plus, there is a totally updated code repository on GitHub to help you practice your newfound skills.'},
+    {
+      "title": "Invent Your Own Computer Games with Python",
+      "author": "Al Sweigart",
+      "description": "This book is well-liked because it teaches the basics of "
+          "Python programming with a fun approach: creating games. You will be "
+          "taught basic logic concepts while programming games such as Tic-Tac-Toe, "
+          "Hangman, and graphic games.",
+      "filename": "inventwithpython.pdf"
+    },
+    {
+      "title": "Eloquent JavaScript: A Modern Introduction to Programming",
+      "author": "Marijn Haverbeke",
+      "description": "One of the \"Holy Books\" or web developers. This book "
+          "covers JavaScript in depth from the basics of syntax, data structure, "
+          "to advanced features such as asynchrony (Promise) and direct interaction "
+          "with the browser interface (DOM).",
+      "filename": "Eloquent_JavaScript_small.pdf"
+    },
+    {
+      "title": "Python for Everybody: Exploring Data Using Python 3",
+      "author": "Dr. Charles R. Severance",
+      "description": "Written by a prominent professor from the University of "
+          "Michigan, this book is very practical for beginners. His main focus is "
+          "on using Python to solve real problems such as reading files, doing web "
+          "scraping, and interacting with SQL databases.",
+      "filename": "pythonlearn.pdf"
+    },
+    {
+      "title": "Introduction to Programming Using Java",
+      "author": "David J. Eck",
+      "description": "A comprehensive university-level textbook that covers Java "
+          "thoroughly. It's perfect if you want a strong Object-Oriented Programming "
+          "(OOP) foundation, algorithm structure, and how to create a user interface (GUI).",
+      "filename": "javanotes9.pdf"
+    },
+    {
+      "title": "Think Python: How to Think Like a Computer Scientist",
+      "author": "Allen B. Downey",
+      "description": "This book focuses on problem solving techniques. Instead "
+          "of just memorizing code, Allen Downey will guide you to structure "
+          "logical thinking like a computer scientist.",
+      "filename": "thinkpython2.pdf"
+    },
+    {
+      "title": "The React Handbook",
+      "author": "Flavio Copes",
+      "description": "The book was written by renowned instructor and developer, "
+          "Flavio Copes. He uses the \"80/20\" rule approach, which is to teach "
+          "80% of the most crucial concepts in React in 20% of your learning time. "
+          "It's perfect for mastering the core of Components, JSX, State, and "
+          "Props without long-winded theory.",
+      "filename": "react-handbook.pdf"
+    },
+    {
+      "title": "Beej's Guide to Network Programming",
+      "author": "Brian \"Beej\" Hall",
+      "description": "An iconic guide for anyone who wants to understand how the "
+          "internet works behind the scenes. Using the C language, \"Beej\" "
+          "explains how Socket, Client-Server, and network traffic work in a "
+          "humorous and easy-to-understand language style.",
+      "filename": "bgnet_usl_c_1.pdf"
+    },
+    {
+      "title": "Flutter Complete Reference",
+      "author": "Alberto Miola",
+      "description": "A very thick and comprehensive main reference for anyone "
+          "who wants to get serious in multi-platform application development "
+          "(Android, iOS, and Web). This book dissects everything from the Dart "
+          "programming language from scratch, the fundamental elements of widgets "
+          "in Flutter, to the advanced level of application architecture.",
+      "filename": "Flutter_Complete_Reference.pdf"
+    },
+    {
+      "title": "Computer Science from the Bottom Up",
+      "author": "Ian Wienand",
+      "description": "If you already know a little bit about coding but want to "
+          "know how your code is executed by machines, this is the book for you. "
+          "This book bridges programming code with Operating Systems, CPU "
+          "Architecture, and Memory Management.",
+      "filename": "csbu.pdf"
+    },
+    {
+      "title": "Learning React: Functional Web Development with React and Redux",
+      "author": "Alex Banks & Eve Porcello",
+      "description": "A book that not only focuses on the React framework itself, "
+          "but also embeds the Functional Programming pattern in JavaScript. This "
+          "book will guide you on how to best build a User Interface (UI) that is "
+          "modular, easy to maintain, and manages data in large-scale applications.",
+      "filename": "learningreact.pdf"
+    }
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Book List')),
+      appBar: AppBar(title: Text('Book List'), centerTitle: true),
       body: ListView.builder(
         itemCount: books.length,
         itemBuilder: (context, index) {
@@ -40,6 +122,7 @@ class BookListScreen extends StatelessWidget {
                     title: books[index]['title']!,
                     author: books[index]['author']!,
                     description: books[index]['description']!,
+                    filename: books[index]['filename']!,
                   ),
                 ),
               );
@@ -55,45 +138,65 @@ class BookDetailScreen extends StatelessWidget {
   final String title;
   final String author;
   final String description;
+  final String filename;
 
-  BookDetailScreen({required this.title, required this.author, required this.description});
+  const BookDetailScreen(
+      {super.key,
+      required this.title,
+      required this.author,
+      required this.description,
+      required this.filename});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(
+          title: Text("Book Detail"),
+          centerTitle: true,
+          automaticallyImplyLeading: false),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Title: $title', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-            SizedBox(height: 8),
-            Text('Author: $author', style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic)),
-            SizedBox(height: 12),
-            Text('Description:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            Text('Title: $title',
+                style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold)),
+            SizedBox(height: 6),
+            Text('Author: $author',
+                style: TextStyle(
+                    fontSize: 18,
+                    fontStyle: FontStyle.italic,
+                    color: Colors.grey.shade600)),
+            SizedBox(height: 24),
+            Text('Description:',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             SizedBox(height: 6),
             Text(description, style: TextStyle(fontSize: 16)),
             SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text('Back'),
-            ),
-
-             ElevatedButton(
-               onPressed: () {
-                 Navigator.push(context,
-                   MaterialPageRoute(
-                     builder: (context) => ReadingBookFile(
-
-                     ),
-                   ),
-                 );
-               },
-               child: Text('Read the book'),
-             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('Back'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ReadingBookFile(
+                          bookPath: filename,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Text('Read the book'),
+                ),
+              ],
+            )
           ],
         ),
       ),
@@ -102,10 +205,17 @@ class BookDetailScreen extends StatelessWidget {
 }
 
 class ReadingBookFile extends StatelessWidget {
+  final String bookPath;
+
+  const ReadingBookFile({super.key, required this.bookPath});
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    Text('Reading Book File');
-    throw UnimplementedError();
+    return Scaffold(
+      appBar: AppBar(title: Text("Reading Book File"), centerTitle: true),
+      body: Center(
+        child: SfPdfViewer.asset('assets/pdf/$bookPath'),
+      ),
+    );
   }
 }
